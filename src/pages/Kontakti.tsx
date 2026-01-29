@@ -65,7 +65,7 @@ export default function Kontakti() {
       );
 
     // Envelope flap loop
-    let loop: anime.AnimeInstance | undefined;
+    let loop: any;
     if (!reducedFX && flapRef.current) {
       const flap = flapRef.current;
       // Helps transforms on SVG
@@ -147,9 +147,7 @@ export default function Kontakti() {
     window.open(url, "_blank", "noopener,noreferrer");
   }
 
-  function openMailto() {
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent("Sveiki — EKO AKA")}`;
-  }
+
 
   function callNow() {
     window.location.href = `tel:${PHONE.replace(/\s+/g, "")}`;
