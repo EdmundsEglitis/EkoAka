@@ -1,6 +1,23 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import logo from "../assets/logo.jpeg";
+import logo from "../assets/logotrans.png";
+
+const address = "Kastaņi, Plācis, Straupes pagasts, Cēsu novads, LV-4152";
+
+const lat = 57.360902;
+const lng = 24.972722;
+
+// Opens Google Maps (pin)
+const googlePlaceUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+
+// Opens Google Maps directions to the pin
+const googleDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
+
+// Optional: Waze directions
+const wazeUrl = `https://waze.com/ul?ll=${lat}%2C${lng}&navigate=yes`;
+
+// Embed map with the pin
+const embedUrl = `https://www.google.com/maps?q=${lat},${lng}&z=16&output=embed`;
 
 type NavItem = { label: string; to: string };
 
@@ -83,13 +100,57 @@ export default function Layout() {
         <Outlet />
       </main>
 
-      <footer className="footer">
-        <div className="container footerInner">
-          <span>© {new Date().getFullYear()} SIA EKO AKA</span>
+
+<footer className="footer footer--contact">
+  <div className="container">
+    <div className="footerTop">
+      <div className="footerContact">
+        <div className="footerLabel">Adrese</div>
+
+        <a className="footerAddressLink" href={googlePlaceUrl} target="_blank" rel="noreferrer">
+          <svg className="footerPin" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 22s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12zm0-9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" />
+          </svg>
+          <span>{address}</span>
+        </a>
+
+        <div className="footerNav">
+          <span className="footerNavLabel">Braukt ar</span>
+
+          <a className="footerLink" href={googleDirectionsUrl} target="_blank" rel="noreferrer">
+            Google Maps
+          </a>
+
           <span className="footerDot">•</span>
-          <span>Darbojamies visā Latvijā</span>
+
+          <a className="footerLink" href={wazeUrl} target="_blank" rel="noreferrer">
+            Waze
+          </a>
         </div>
-      </footer>
+      </div>
+    </div>
+
+    {/* ✅ Map is inside container => same width as navbar */}
+    <div className="footerMap">
+      <iframe
+        title="Google Maps"
+        src={embedUrl}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        allowFullScreen
+      />
+    </div>
+  </div>
+        <div className="footercenter">
+        <span>© {new Date().getFullYear()} SIA EKO AKA</span>
+        <span className="footerDot"> • </span>
+        <span>Darbojamies visā Latvijā</span>
+      </div>
+
+</footer>
+
+
+
     </div>
   );
 }

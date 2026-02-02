@@ -1,0 +1,17 @@
+:root {
+  /* Extracted from your logo */
+  --green-900: #2e4c0c; /* dark green */
+  --sage-700: #6c7d5b;  /* sage */
+  --sage-500: #a7ad9c;  /* light sage */
+  --paper: #f2f6ee;     /* off white */
+  --stone: #e1dcd7;     /* warm light gray */
+  --white: #ffffff;
+
+  --bg: var(--paper);
+  --text: #1f2a14;
+  --muted: #4a5a3b;
+
+  --primary: var(--green-900);
+  --primarySoft: rgba(46, 76, 12, 0.12);
+  --border: rgba(46, 76, 12, 0.18);
+}

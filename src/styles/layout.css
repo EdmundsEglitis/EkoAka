@@ -1,0 +1,24 @@
+.page { min-height: 100vh; }
+
+.container {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.main { min-height: calc(100vh - 140px); }
+
+.section { padding: 44px 0; }
+.sectionTight { padding-top: 28px; }
+
+.sectionHeader h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  letter-spacing: 0.2px;
+}
+
+.sectionHeader p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  max-width: 70ch;
+  line-height: 1.55;
+}

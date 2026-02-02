@@ -1,8 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import anime from "animejs/lib/anime.es.js";
 
-
-const EMAIL = "nauris@gmail.com";
+const EMAIL = "npgrodi88@inbox.lv";
 const PHONE = "+37128490668";
 
 function usePrefersReducedMotion() {
@@ -12,8 +11,15 @@ function usePrefersReducedMotion() {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onChange = () => setReduced(mq.matches);
     onChange();
-    mq.addEventListener?.("change", onChange);
-    return () => mq.removeEventListener?.("change", onChange);
+
+    // Safari fallback
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
+    else mq.addListener?.(onChange);
+
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", onChange);
+      else mq.removeListener?.(onChange);
+    };
   }, []);
 
   return reduced;
@@ -32,90 +38,92 @@ export default function Kontakti() {
   useEffect(() => {
     document.title = "Kontakti — EKO AKA";
 
-    // Entrance + character stagger
-    const tl = anime.timeline({ autoplay: true });
-    tl.add({
-      targets: ".contactCard",
-      opacity: [0, 1],
-      translateY: [18, 0],
-      duration: 420,
-      easing: "easeOutCubic",
-    })
-      .add(
-        {
-          targets: ".emailChar",
-          translateY: [12, 0],
-          opacity: [0, 1],
-          delay: anime.stagger(18),
-          duration: 280,
-          easing: "easeOutCubic",
-        },
-        "-=160"
-      )
-      .add(
-        {
-          targets: ".phoneChar",
-          translateY: [12, 0],
-          opacity: [0, 1],
-          delay: anime.stagger(16),
-          duration: 260,
-          easing: "easeOutCubic",
-        },
-        "-=120"
-      );
+    if (!reducedFX) {
+      // Entrance + character stagger
+      const tl = anime.timeline({ autoplay: true });
+      tl.add({
+        targets: ".contactCard",
+        opacity: [0, 1],
+        translateY: [18, 0],
+        duration: 420,
+        easing: "easeOutCubic",
+      })
+        .add(
+          {
+            targets: ".emailChar",
+            translateY: [12, 0],
+            opacity: [0, 1],
+            delay: anime.stagger(18),
+            duration: 280,
+            easing: "easeOutCubic",
+          },
+          "-=160"
+        )
+        .add(
+          {
+            targets: ".phoneChar",
+            translateY: [12, 0],
+            opacity: [0, 1],
+            delay: anime.stagger(16),
+            duration: 260,
+            easing: "easeOutCubic",
+          },
+          "-=120"
+        );
 
-    // Envelope flap loop
-    let loop: any;
-    if (!reducedFX && flapRef.current) {
-      const flap = flapRef.current;
-      // Helps transforms on SVG
-      flap.style.transformBox = "fill-box";
-      flap.style.transformOrigin = "50% 20%";
-      flap.style.transformStyle = "preserve-3d";
-
-      loop = anime({
-        targets: flap,
-        rotateX: [{ value: -25 }, { value: -12 }],
-        duration: 2800,
-        direction: "alternate",
-        easing: "easeInOutSine",
-        loop: true,
-      });
+      return () => {
+        tl.pause();
+      };
     }
+  }, [reducedFX]);
+
+  useEffect(() => {
+    // Envelope flap loop
+    if (reducedFX || !flapRef.current) return;
+
+    const flap = flapRef.current;
+    flap.style.transformBox = "fill-box";
+    flap.style.transformOrigin = "50% 20%";
+    flap.style.transformStyle = "preserve-3d";
+
+    const loop = anime({
+      targets: flap,
+      rotateX: [{ value: -25 }, { value: -12 }],
+      duration: 2800,
+      direction: "alternate",
+      easing: "easeInOutSine",
+      loop: true,
+    });
 
     const onVis = () => {
-      if (!loop) return;
       if (document.hidden) loop.pause();
       else loop.play();
     };
     document.addEventListener("visibilitychange", onVis);
 
     return () => {
-      tl.pause();
-      loop?.pause();
+      loop.pause();
       document.removeEventListener("visibilitychange", onVis);
     };
   }, [reducedFX]);
 
-  async function copy(text: string, setFn: (v: boolean) => void, anchorId: string) {
-    try {
-      await navigator.clipboard.writeText(text);
-      setFn(true);
-      popConfetti(anchorId);
-      window.setTimeout(() => setFn(false), 1200);
-    } catch {
-      // If clipboard blocked, do nothing (you can add fallback if you want)
-    }
-  }
+  function popConfettiFromEl(el: HTMLElement) {
+    if (reducedFX) return;
 
-  function popConfetti(anchorId: string) {
-    const anchor = document.getElementById(anchorId);
-    if (!anchor) return;
+    // Make sure confetti can position within the element
+    const computed = window.getComputedStyle(el);
+    if (computed.position === "static") {
+      el.style.position = "relative";
+    }
+    // Avoid clipping
+    if (computed.overflow === "hidden") {
+      el.style.overflow = "visible";
+    }
 
     const n = 14;
     const host = document.createElement("div");
     host.className = "confettiHost";
-    anchor.appendChild(host);
+    el.appendChild(host);
 
     const frags: HTMLSpanElement[] = [];
     for (let i = 0; i < n; i++) {
@@ -133,28 +141,72 @@ export default function Kontakti() {
         Math.sin((i / n) * Math.PI * 2) * (32 + Math.random() * 12),
       rotate: (_: any, i: number) => (i / n) * 360,
       scale: [{ value: 1.2, duration: 80 }, { value: 1, duration: 120 }],
-      opacity: [{ value: 1 }, { value: 0, delay: 140 }],
+      opacity: [{ value: 1, duration: 0 }, { value: 0, delay: 140 }],
       duration: 420,
       easing: "easeOutCubic",
       complete: () => host.remove(),
     });
   }
 
-  function openGmailCompose() {
+  async function tryClipboardWrite(text: string) {
+    // Primary
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    // Fallback
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    ta.style.top = "-9999px";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    if (!ok) throw new Error("Copy failed");
+  }
+
+  async function copy(
+    e: React.MouseEvent<HTMLButtonElement>,
+    text: string,
+    setFn: (v: boolean) => void
+  ) {
+    // ✅ Always show confetti on click
+    popConfettiFromEl(e.currentTarget);
+
+    try {
+      await tryClipboardWrite(text);
+      setFn(true);
+      window.setTimeout(() => setFn(false), 1200);
+    } catch {
+      // Clipboard blocked - we already popped confetti; optionally show UI here
+    }
+  }
+
+  function openGmailCompose(e: React.MouseEvent<HTMLButtonElement>) {
+    popConfettiFromEl(e.currentTarget);
+
     const url = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(
       EMAIL
     )}&su=${encodeURIComponent("Sveiki — EKO AKA")}`;
     window.open(url, "_blank", "noopener,noreferrer");
   }
 
-
-
-  function callNow() {
-    window.location.href = `tel:${PHONE.replace(/\s+/g, "")}`;
+  function callNow(e: React.MouseEvent<HTMLButtonElement>) {
+    popConfettiFromEl(e.currentTarget);
+    // Small delay so user sees the burst before navigation
+    window.setTimeout(() => {
+      window.location.href = `tel:${PHONE.replace(/\s+/g, "")}`;
+    }, reducedFX ? 0 : 120);
   }
 
-  function smsNow() {
-    window.location.href = `sms:${PHONE.replace(/\s+/g, "")}`;
+  function smsNow(e: React.MouseEvent<HTMLButtonElement>) {
+    popConfettiFromEl(e.currentTarget);
+    window.setTimeout(() => {
+      window.location.href = `sms:${PHONE.replace(/\s+/g, "")}`;
+    }, reducedFX ? 0 : 120);
   }
 
   return (
@@ -170,7 +222,7 @@ export default function Kontakti() {
         </div>
 
         <div className="contactBlock">
-          <div className="contactPill" id="email-burst-anchor" title="Spied Kopēt, lai nokopētu e-pastu">
+          <div className="contactPill" title="Spied Kopēt, lai nokopētu e-pastu">
             <span className="pillLabel">E-pasts</span>
             <code className="pillCode">
               {emailChars.map((c, i) => (
@@ -180,22 +232,25 @@ export default function Kontakti() {
               ))}
             </code>
             <button
+              type="button"
               className="contactBtn"
-              onClick={() => copy(EMAIL, setCopiedEmail, "email-burst-anchor")}
+              onClick={(e) => copy(e, EMAIL, setCopiedEmail)}
             >
               {copiedEmail ? "Nokopēts!" : "Kopēt"}
             </button>
           </div>
 
           <div className="btnRow">
-            <button className="contactBtn" onClick={openGmailCompose}>Atvērt Gmail</button>
+            <button type="button" className="contactBtn" onClick={openGmailCompose}>
+              Atvērt Gmail
+            </button>
           </div>
         </div>
 
         <div className="divider" />
 
         <div className="contactBlock">
-          <div className="contactPill" id="phone-burst-anchor" title="Spied Kopēt, lai nokopētu tālruni">
+          <div className="contactPill" title="Spied Kopēt, lai nokopētu tālruni">
             <span className="pillLabel">Tālrunis</span>
             <code className="pillCode">
               {phoneChars.map((c, i) => (
@@ -205,16 +260,21 @@ export default function Kontakti() {
               ))}
             </code>
             <button
+              type="button"
               className="contactBtn"
-              onClick={() => copy(PHONE, setCopiedPhone, "phone-burst-anchor")}
+              onClick={(e) => copy(e, PHONE, setCopiedPhone)}
             >
               {copiedPhone ? "Nokopēts!" : "Kopēt"}
             </button>
           </div>
 
           <div className="btnRow">
-            <button className="contactBtn" onClick={callNow}>Zvanīt</button>
-            <button className="contactBtn contactBtnGhost" onClick={smsNow}>Sūtīt SMS</button>
+            <button type="button" className="contactBtn" onClick={callNow}>
+              Zvanīt
+            </button>
+            <button type="button" className="contactBtn contactBtnGhost" onClick={smsNow}>
+              Sūtīt SMS
+            </button>
           </div>
         </div>
 
@@ -226,7 +286,11 @@ export default function Kontakti() {
   );
 }
 
-function Envelope({ flapRef }: { flapRef: React.RefObject<SVGPathElement | null> }) {
+function Envelope({
+  flapRef,
+}: {
+  flapRef: React.RefObject<SVGPathElement | null>;
+}) {
   return (
     <svg
       className="envelopeSvg"

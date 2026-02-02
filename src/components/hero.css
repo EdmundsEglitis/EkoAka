@@ -1,0 +1,90 @@
+.hero {
+  padding: 44px 0 28px;
+  background:
+    radial-gradient(900px 420px at 20% 0%, rgba(46, 76, 12, 0.14), transparent 70%),
+    radial-gradient(900px 420px at 80% 10%, rgba(108, 125, 91, 0.20), transparent 70%);
+  border-bottom: 1px solid var(--border);
+}
+
+.heroInner {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.heroCopy h1 {
+  font-size: clamp(28px, 3vw, 42px);
+  margin: 0 0 10px;
+  letter-spacing: -0.3px;
+}
+
+.heroCopy p {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.heroCtas {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btnPrimary,
+.btnSecondary {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-weight: 900;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 120ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: var(--paper);
+  border-color: rgba(46, 76, 12, 0.3);
+}
+
+.btnPrimary:hover { filter: brightness(1.02); }
+
+.btnSecondary {
+  background: var(--white);
+  color: var(--primary);
+  border-color: var(--border);
+}
+
+.btnSecondary:hover { background: rgba(255, 255, 255, 0.7); }
+
+.btnPrimary:active,
+.btnSecondary:active { transform: translateY(1px); }
+
+.heroCard {
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 16px;
+}
+
+.heroCardTitle {
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.heroList {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+@media (max-width: 920px) {
+  .heroInner { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,27 @@
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.card {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.cardTitle {
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.cardBody {
+  color: var(--muted);
+  line-height: 1.55;
+  font-size: 14.5px;
+}
+
+@media (max-width: 860px) {
+  .grid3 { grid-template-columns: 1fr; }
+}
