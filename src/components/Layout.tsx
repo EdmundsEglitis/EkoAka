@@ -1,7 +1,8 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from "../assets/logotrans.png";
-
+import ConsentEmbed from "../components/ConsentEmbed";
+import mapPreview from "../assets/googlemapspreview.png"; // screenshot or static map image
 const address = "Kastaņi, Plācis, Straupes pagasts, Cēsu novads, LV-4152";
 
 const lat = 57.360902;
@@ -16,8 +17,6 @@ const googleDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=
 // Optional: Waze directions
 const wazeUrl = `https://waze.com/ul?ll=${lat}%2C${lng}&navigate=yes`;
 
-// Embed map with the pin
-const embedUrl = `https://www.google.com/maps?q=${lat},${lng}&z=16&output=embed`;
 
 type NavItem = { label: string; to: string };
 
@@ -132,13 +131,15 @@ export default function Layout() {
 
     {/* ✅ Map is inside container => same width as navbar */}
     <div className="footerMap">
-      <iframe
-        title="Google Maps"
-        src={embedUrl}
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        allowFullScreen
-      />
+        <ConsentEmbed
+          storageKey="consent:google-maps"
+          title="EKO AKA atrašanās vieta"
+          providerName="Google Maps"
+          providerPolicyUrl="https://policies.google.com/technologies/cookies"
+          src="https://www.google.com/maps?q=57.360902,24.972722&z=16&output=embed"
+          previewImageUrl={mapPreview}
+          height={360}
+        />
     </div>
   </div>
         <div className="footercenter">

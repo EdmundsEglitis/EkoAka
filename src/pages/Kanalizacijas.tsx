@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ConsentEmbed from "../components/ConsentEmbed";
+import sketchPreview from "../assets/sketchfabpreview.png"; // make a screenshot image
 
 export default function Kanalizacijas() {
   const [more, setMore] = useState(false);
@@ -17,12 +19,13 @@ export default function Kanalizacijas() {
         {/* 3D preview */}
         <div className="modelCard" style={{ marginBottom: 18 }}>
           <div className="modelFrame">
-            <iframe
-              title="kanalizacija"
+            <ConsentEmbed
+              storageKey="consent:sketchfab"
+              title="Kanalizācijas sistēmas vizualizācija"
+              providerName="Sketchfab"
+              providerPolicyUrl="https://sketchfab.com/privacy"
               src="https://sketchfab.com/models/313d0bee3af14f038433f82964026288/embed"
-              frameBorder="0"
-              allow="autoplay; fullscreen; xr-spatial-tracking"
-              allowFullScreen
+              previewImageUrl={sketchPreview}
             />
           </div>
 

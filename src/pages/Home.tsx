@@ -5,7 +5,10 @@ import kanalizacijaImg from "../assets/kanalizacija.jpg";
 import vaksImg from "../assets/vāks.jpg";
 import contactImg from "../assets/contact.png";
 import reviewsData from "../data/reviews.json";
-import LazyIframe from "../components/LazyIframe";
+
+import ConsentEmbed from "../components/ConsentEmbed";
+import sketchPreview from "../assets/sketchfabpreview.png"; // make a screenshot image
+
 
 const REVIEWS: { name: string; stars: number; text: string }[] = reviewsData;
 function Stars({ value }: { value: number }) {
@@ -60,12 +63,15 @@ export default function Home() {
 
           <div className="modelCard">
             <div className="modelFrame">
-              <LazyIframe
-                title="kanalizacija"
-                src="https://sketchfab.com/models/313d0bee3af14f038433f82964026288/embed"
-                className="modelFrame"
-                height={520}
-              />
+                <ConsentEmbed
+                  storageKey="consent:sketchfab"
+                  title="Kanalizācijas sistēmas vizualizācija"
+                  providerName="Sketchfab"
+                  providerPolicyUrl="https://sketchfab.com/privacy"
+                  src="https://sketchfab.com/models/313d0bee3af14f038433f82964026288/embed"
+                  previewImageUrl={sketchPreview}
+                  height={520}
+                />
             </div>
 
             <div className="modelMeta">
