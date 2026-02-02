@@ -1,0 +1,278 @@
+/* ===== Portfolio / Paveiktie darbi ===== */
+
+.portfolioGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 980px) {
+  .portfolioGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .portfolioGrid { grid-template-columns: 1fr; }
+}
+
+.portfolioCard {
+  text-align: left;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.portfolioCard:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(46, 76, 12, 0.28);
+}
+
+.portfolioCard:focus-visible {
+  outline: 3px solid rgba(46, 76, 12, 0.25);
+  outline-offset: 3px;
+}
+
+.portfolioMedia {
+  position: relative;
+  height: 190px;
+  background: rgba(46, 76, 12, 0.06);
+}
+
+.portfolioImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.portfolioPlaceholder {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: rgba(74, 90, 59, 0.9);
+}
+
+.portfolioChipRow {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.portfolioChip {
+  background: rgba(46, 76, 12, 0.9);
+  color: var(--paper);
+  border: 1px solid rgba(46, 76, 12, 0.25);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.portfolioChipSoft {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--primary);
+  border-color: rgba(46, 76, 12, 0.18);
+}
+
+.portfolioBody {
+  padding: 14px 14px 16px;
+  display: grid;
+  gap: 6px;
+}
+
+.portfolioTitle {
+  font-weight: 900;
+  font-size: 15.5px;
+}
+
+.portfolioMeta {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.portfolioText {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* ===== Modal ===== */
+
+.portfolioModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+}
+
+.portfolioBackdropBtn {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+.portfolioModal {
+  position: relative;
+  width: min(1100px, calc(100% - 24px));
+  background: rgba(242, 246, 238, 0.98);
+  border: 1px solid rgba(46, 76, 12, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.25);
+  padding: 14px;
+  z-index: 210;
+}
+
+.portfolioClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: 1px solid rgba(46, 76, 12, 0.18);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.portfolioModalGrid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 14px;
+  align-items: start;
+}
+
+@media (max-width: 980px) {
+  .portfolioModalGrid { grid-template-columns: 1fr; }
+}
+
+.portfolioViewer {
+  border: 1px solid rgba(46, 76, 12, 0.18);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.portfolioViewerImg {
+  width: 100%;
+  height: min(56vh, 520px);
+  object-fit: cover;
+  display: block;
+  background: rgba(46, 76, 12, 0.06);
+}
+
+.portfolioViewerControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(46, 76, 12, 0.18);
+  background: rgba(242, 246, 238, 0.7);
+}
+
+.portfolioNavBtn {
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 900;
+  cursor: pointer;
+  border: 1px solid rgba(46, 76, 12, 0.22);
+  background: var(--white);
+  color: var(--primary);
+}
+
+.portfolioNavBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.portfolioCounter {
+  font-weight: 900;
+  color: var(--muted);
+}
+
+.portfolioThumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 10px 12px;
+  border-top: 1px solid rgba(46, 76, 12, 0.14);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.portfolioThumb {
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.portfolioThumb img {
+  width: 92px;
+  height: 62px;
+  object-fit: cover;
+  display: block;
+}
+
+.portfolioThumbActive {
+  border-color: rgba(46, 76, 12, 0.6);
+}
+
+.portfolioInfo {
+  border: 1px solid rgba(46, 76, 12, 0.18);
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.portfolioInfoTitle {
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.portfolioInfoRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.portfolioInfoTag {
+  border-radius: 999px;
+  padding: 6px 10px;
+  border: 1px solid rgba(46, 76, 12, 0.18);
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--primary);
+}
+
+.portfolioInfoText {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.portfolioInfoHint {
+  margin-top: 12px;
+  font-size: 12px;
+  color: rgba(74, 90, 59, 0.85);
+}

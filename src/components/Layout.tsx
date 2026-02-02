@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import logo from "../assets/logotrans.png";
 import ConsentEmbed from "../components/ConsentEmbed";
 import mapPreview from "../assets/googlemapspreview.png"; // screenshot or static map image
+import { Link} from "react-router-dom";
 const address = "Kastaņi, Plācis, Straupes pagasts, Cēsu novads, LV-4152";
 
 const lat = 57.360902;
@@ -19,6 +20,12 @@ const wazeUrl = `https://waze.com/ul?ll=${lat}%2C${lng}&navigate=yes`;
 
 
 type NavItem = { label: string; to: string };
+function resetExternalMediaConsent() {
+  localStorage.removeItem("consent:google-maps");
+  localStorage.removeItem("consent:sketchfab");
+  // Optional: refresh so embeds go back to blurred state immediately
+  window.location.reload();
+}
 
 export default function Layout() {
   const navItems: NavItem[] = [
@@ -27,6 +34,7 @@ export default function Layout() {
     { label: "KANALIZĀCIJAS SISTĒMAS", to: "/kanalizacijas-sistemas" },
     { label: "DZERAMĀ UDENS AKAS", to: "/dzerama-udens-akas" },
     { label: "KONTAKTI", to: "/kontakti" },
+    { label: "PAVEIKTIE DARBI", to: "/paveiktie-darbi" },
   ];
 
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -147,7 +155,20 @@ export default function Layout() {
         <span className="footerDot"> • </span>
         <span>Darbojamies visā Latvijā</span>
       </div>
-
+      <div className="footercenter">                 
+        <Link className="footerPolicyLink footerPolicyBtn" to="/privatuma-politika">
+            Privātuma politika
+        </Link>
+      </div>
+          <div className="footercenter">   
+                <button
+                    type="button"
+                    className="footerPolicyLink footerPolicyBtn"
+                    onClick={resetExternalMediaConsent}
+                  >
+                  Atiestatīt ārējā satura izvēli
+                </button>
+          </div>
 </footer>
 
 

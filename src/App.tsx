@@ -9,6 +9,8 @@ const Parsedzes = lazy(() => import("./pages/Parsedzes"));
 const Kanalizacijas = lazy(() => import("./pages/Kanalizacijas"));
 const DzeramaUdensAkas = lazy(() => import("./pages/DzeramaUdensAkas"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const PrivatumaPolitika = lazy(() => import("./pages/PrivatumaPolitika"));
+const PaveiktieDarbi = lazy(() => import("./pages/PaveiktieDarbi.tsx"));
 
 export default function App() {
   return (
@@ -21,6 +23,8 @@ export default function App() {
           <Route path="/kanalizacijas-sistemas" element={<Kanalizacijas />} />
           <Route path="/dzerama-udens-akas" element={<DzeramaUdensAkas />} />
           <Route path="/kontakti" element={<Kontakti />} />
+          <Route path="/privatuma-politika" element={<PrivatumaPolitika />} />
+          <Route path="/paveiktie-darbi" element={<PaveiktieDarbi />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

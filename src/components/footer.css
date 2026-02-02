@@ -113,3 +113,38 @@
 @media (max-width: 900px) {
   .footer--contact .footerMap iframe { height: 260px; }
 }
+ /* Shared visual style for both the Link and the Button */
+.footerPolicyLink,
+.footerPolicyLink:visited {
+  color: var(--primary);
+  font-weight: 800;
+  opacity: 1;                 /* <- important */
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+/* Hover/focus states */
+.footerPolicyLink:hover {
+  text-decoration-thickness: 3px;
+}
+
+.footerPolicyLink:focus-visible {
+  outline: 3px solid rgba(46, 76, 12, 0.25);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Make <button> behave like a link (no default button styling) */
+.footerPolicyBtn {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;              /* <- important */
+  color: inherit;             /* <- important */
+  line-height: inherit;
+  cursor: pointer;
+}

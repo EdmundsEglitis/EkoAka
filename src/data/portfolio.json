@@ -1,0 +1,56 @@
+[
+  {
+    "id": "grodi-madona-01",
+    "title": "Grodu montāža privātmājai",
+    "location": "Madonas novads",
+    "date": "2025-06",
+    "category": "Grodi / montāža",
+    "text": "Uzstādījām grodus un sagatavojām pieslēgumu sistēmai. Darbs paveikts 1 dienā.",
+    "images": ["/portfolio/portfolio4.jpg", "/portfolio/portfolio1.jpg"]
+  },
+  {
+    "id": "kanalizacija-cesis-01",
+    "title": "Kanalizācijas sistēma ar infiltrāciju",
+    "location": "Cēsu novads",
+    "date": "2025-07",
+    "category": "Kanalizācijas sistēmas",
+    "text": "Pilns risinājums ar tvertni un infiltrācijas lauku. Pielāgots grunts apstākļiem.",
+    "images": ["/portfolio/portfolio3.jpg"]
+  },
+  {
+    "id": "aka-valmiera-01",
+    "title": "Dzeramā ūdens aka un pieslēgums",
+    "location": "Valmieras novads",
+    "date": "2025-05",
+    "category": "Dzeramā ūdens akas",
+    "text": "Izveidota ūdens aka un pieslēgta ūdens apgādes sistēmai. Sakopts objekts pēc darba.",
+    "images": ["/portfolio/portfolio1.jpg", "/portfolio/portfolio2.jpg"]
+  },
+  {
+    "id": "parsedze-01",
+    "title": "Pārsedzes uzstādīšana",
+    "location": "Rīga",
+    "date": "2025-04",
+    "category": "Pārsedzes / vāki",
+    "text": "Uzstādījām pārsedzi ar precīzu piesēdinājumu un līmeņošanu.",
+    "images": ["/portfolio/portfolio1.jpg"]
+  },
+    {
+    "id": "grodi-madona-01",
+    "title": "Grodu montāža privātmājai",
+    "location": "Madonas novads",
+    "date": "2025-06",
+    "category": "Grodi / montāža",
+    "text": "Uzstādījām grodus un sagatavojām pieslēgumu sistēmai. Darbs paveikts 1 dienā.",
+    "images": ["/portfolio/portfolio4.jpg", "/portfolio/portfolio1.jpg"]
+  },
+  {
+    "id": "kanalizacija-cesis-01",
+    "title": "Kanalizācijas sistēma ar infiltrāciju",
+    "location": "Cēsu novads",
+    "date": "2025-07",
+    "category": "Kanalizācijas sistēmas",
+    "text": "Pilns risinājums ar tvertni un infiltrācijas lauku. Pielāgots grunts apstākļiem.",
+    "images": ["/portfolio/portfolio3.jpg"]
+  }
+]
