@@ -89,7 +89,7 @@ export default function Home() {
     <div className="quickNavGrid">
       <Link className="quickCard" to="/grodi">
         <div className="quickImgWrap">
-          <img className="quickImg" src={grodiImg} alt="Grodi" />
+          <img className="quickImg" src={grodiImg} alt="Grodi" loading="lazy" decoding="async" />
           <div className="quickTitle">GRODI</div>
         </div>
         <div className="quickBody">
@@ -99,7 +99,7 @@ export default function Home() {
 
       <Link className="quickCard" to="/parsedzes">
         <div className="quickImgWrap">
-          <img className="quickImg" src={vaksImg} alt="Pārsedzes un vāki" />
+          <img className="quickImg" src={vaksImg} alt="Pārsedzes un vāki" loading="lazy" decoding="async" />
           <div className="quickTitle">PĀRSEDZES</div>
         </div>
         <div className="quickBody">
@@ -109,7 +109,7 @@ export default function Home() {
 
       <Link className="quickCard" to="/kanalizacijas-sistemas">
         <div className="quickImgWrap">
-          <img className="quickImg" src={kanalizacijaImg} alt="Kanalizācijas sistēmas" />
+          <img className="quickImg" src={kanalizacijaImg} alt="Kanalizācijas sistēmas" loading="lazy" decoding="async" />
           <div className="quickTitle">KANALIZĀCIJAS SISTĒMAS</div>
         </div>
         <div className="quickBody">
@@ -119,7 +119,7 @@ export default function Home() {
 
       <Link className="quickCard" to="/kontakti">
         <div className="quickImgWrap">
-          <img className="quickImg" src={contactImg} alt="Kontakti" />
+          <img className="quickImg" src={contactImg} alt="Kontakti" loading="lazy" decoding="async" />
           <div className="quickTitle">KONTAKTI</div>
         </div>
         <div className="quickBody">
