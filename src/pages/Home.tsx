@@ -5,6 +5,7 @@ import kanalizacijaImg from "../assets/kanalizacija.jpg";
 import vaksImg from "../assets/vāks.jpg";
 import contactImg from "../assets/contact.png";
 import reviewsData from "../data/reviews.json";
+import LazyIframe from "../components/LazyIframe";
 
 const REVIEWS: { name: string; stars: number; text: string }[] = reviewsData;
 function Stars({ value }: { value: number }) {
@@ -59,12 +60,11 @@ export default function Home() {
 
           <div className="modelCard">
             <div className="modelFrame">
-              <iframe
+              <LazyIframe
                 title="kanalizacija"
                 src="https://sketchfab.com/models/313d0bee3af14f038433f82964026288/embed"
-                frameBorder="0"
-                allow="autoplay; fullscreen; xr-spatial-tracking"
-                allowFullScreen
+                className="modelFrame"
+                height={520}
               />
             </div>
 
