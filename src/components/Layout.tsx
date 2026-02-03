@@ -4,6 +4,9 @@ import logo from "../assets/logotrans.png";
 import ConsentEmbed from "../components/ConsentEmbed";
 import mapPreview from "../assets/googlemapspreview.png"; // screenshot or static map image
 import { Link} from "react-router-dom";
+import ttIcon from "../assets/tt.svg";
+import fbIcon from "../assets/fb.svg";
+
 const address = "Kastaņi, Plācis, Straupes pagasts, Cēsu novads, LV-4152";
 
 const lat = 57.360902;
@@ -150,29 +153,50 @@ export default function Layout() {
         />
     </div>
   </div>
+
         <div className="footercenter">
         <span>© {new Date().getFullYear()} SIA EKO AKA</span>
         <span className="footerDot"> • </span>
         <span>Darbojamies visā Latvijā</span>
-      </div>
-      <div className="footercenter">                 
-        <Link className="footerPolicyLink footerPolicyBtn" to="/privatuma-politika">
+        <span className="footerDot"> • </span>
+                  <span className="footerSocialInline">
+              <a
+                className="footerSocialLink"
+                href="https://www.facebook.com/PASTE_YOUR_PAGE"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+                title="Facebook"
+              >
+                <img className="footerSocialIcon" src={fbIcon} alt="" />
+              </a>
+
+              <a
+                className="footerSocialLink"
+                href="https://www.tiktok.com/@PASTE_YOUR_HANDLE"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="TikTok"
+                title="TikTok"
+              >
+                <img className="footerSocialIcon" src={ttIcon} alt="" />
+              </a>
+            </span>
+
+           <span className="footerDot"> • </span>
+                   <Link className="footerPolicyLink footerPolicyBtn" to="/privatuma-politika">
             Privātuma politika
         </Link>
-      </div>
-          <div className="footercenter">   
-                <button
+        <span className="footerDot"> • </span>
+                        <button
                     type="button"
                     className="footerPolicyLink footerPolicyBtn"
                     onClick={resetExternalMediaConsent}
                   >
                   Atiestatīt ārējā satura izvēli
                 </button>
-          </div>
+      </div>
 </footer>
-
-
-
     </div>
   );
 }

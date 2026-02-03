@@ -148,3 +148,55 @@
   line-height: inherit;
   cursor: pointer;
 }
+
+.footerSocials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0 18px;
+}
+
+.footerSocialLink {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.footerSocialLink:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.footerSocialLink:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.14);
+}
+
+.footerSocialIcon {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+/* Phones: stack footer bottom items */
+@media (max-width: 600px) {
+  .footercenter {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footercenter .footerDot {
+    display: none;
+  }
+}
+.footerSocialInline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
